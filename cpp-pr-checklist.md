@@ -4,6 +4,7 @@
 
 - [ ] Members of a class should be prefixed with a `m_`
 - [ ] Static variables should be prefixed with a `s_`
+- [ ] Struct names should be generic enough to encompass all inside parameters logically
 
 ## Classes
 
