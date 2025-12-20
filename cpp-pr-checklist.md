@@ -31,3 +31,7 @@
 
 ## Task Acceptance / Requirements
 - [ ] Acceptance criteria for the work item/story is defined for QA
+
+## Book advice
+- [ ] Prefer `auto` to explicit type declarations
+- [ ] When casting to different type, prefer explicit `static_cast` for clarity.
