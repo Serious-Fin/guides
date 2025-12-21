@@ -35,3 +35,39 @@
 ## Book advice
 - [ ] Prefer `auto` to explicit type declarations
 - [ ] When casting to different type, prefer explicit `static_cast` for clarity.
+- [ ] For object ctor use brace syntax (`obj{...}`) for most widely used initialization syntax and parentheses syntax (`obj(...)`) for handling `std::initializer_list` params correctly.
+- [ ] Prefer `nullptr` to `0` and `NULL`. Because `nullptr` can't be converter to any integral implicitly. Also improves code clarity.
+- [ ] Prefer `alias` declarations to `typedef`s. Alias syntax is simpler and supports templatization.
+
+Using `typedef` syntax:
+```cpp
+typedef
+    std::unique_ptr<std::unordered_map<std::string, std::string>>
+    UPtrMapSS;
+```
+
+Using `alias` syntax:
+```cpp
+using UPtrMapSS =
+    std::unique_ptr<std::unordered_map<std::string, std::string>>;
+```
+
+- [ ] Prefer scoped enums to unscoped enums.
+
+Using unscoped enums:
+```cpp
+enum Color { black, white, red };
+auto white = false; // error! white already declared in this scope
+```
+
+Using scoped enums:
+```cpp
+enum class Color { black, white, red };
+auto white = false; // Ok
+```
+
+- [ ] Prefer `const_iterator` to `iterator`
+
+## To ask:
+- Do we prefer `auto` in our code base if it can be used?
+- Is there a standard way of initialization that we should use? Braces, parenmtheses?
