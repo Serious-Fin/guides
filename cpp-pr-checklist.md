@@ -67,6 +67,8 @@ auto white = false; // Ok
 ```
 
 - [ ] Prefer `const_iterator` to `iterator`
+- [ ] Declare functions `noexcept` if they won't emit exceptions. `noexcept` is particularry valuable for move operations, `swap`, deallocations functions and destructors.
+- [ ] Use `constexpr` whenever possible.
 
 ## To ask:
 - Do we prefer `auto` in our code base if it can be used?
