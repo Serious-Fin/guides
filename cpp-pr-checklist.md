@@ -69,6 +69,10 @@ auto white = false; // Ok
 - [ ] Prefer `const_iterator` to `iterator`
 - [ ] Declare functions `noexcept` if they won't emit exceptions. `noexcept` is particularry valuable for move operations, `swap`, deallocations functions and destructors.
 - [ ] Use `constexpr` whenever possible.
+- [ ] Ensure thread safety in member functions when those are used in concurrent contexts using `atomic` for simpler cases and `mutex` for more complex cases.
+- [ ] Use `std::unique_ptr` for exclusive-ownership resource management.
+
+(end at item 19, p143)
 
 ## To ask:
 - Do we prefer `auto` in our code base if it can be used?
