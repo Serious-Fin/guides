@@ -71,8 +71,11 @@ auto white = false; // Ok
 - [ ] Use `constexpr` whenever possible.
 - [ ] Ensure thread safety in member functions when those are used in concurrent contexts using `atomic` for simpler cases and `mutex` for more complex cases.
 - [ ] Use `std::unique_ptr` for exclusive-ownership resource management.
+- [ ] Use `std::shared_ptr` for shared ownership resource management.
+- [ ] Use `std::weak_ptr` for `std::shared_ptr`-like pointers that can dangle and code should be able to detect that dangling.
+- [ ] Prefer `std::make_unique` and `std::make_shared` to direct use of `new`.
 
-(end at item 19, p143)
+(end at chapter 5, p175)
 
 ## To ask:
 - Do we prefer `auto` in our code base if it can be used?
