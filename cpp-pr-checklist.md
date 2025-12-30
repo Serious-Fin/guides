@@ -1,12 +1,14 @@
 # C++ PR Checklist
 
 ## Naming & Conventions
+
 - [ ] Class member variables are prefixed with `m_`
 - [ ] Static class variables are prefixed with `s_`
 - [ ] Struct/class names are descriptive and logically represent their contents
 - [ ] Naming follows team conventions consistently
 
 ## Class & API Design
+
 - [ ] Unused methods are removed
 - [ ] Parameter types avoid unnecessary casting; choose the safest, most specific type
 - [ ] Functions with no parameters use an empty parameter list (`void` omitted)
@@ -16,23 +18,28 @@
 - [ ] Use references on complex types to avoid copying
 
 ## Iterators & STL Usage
+
 - [ ] When checking key existence in `std::map`, use `find()` and handle the “not found” case
 - [ ] Avoid unsafe use of `at()` unless bounds checking is explicitly intended
 
 ## Error Handling & Safety
+
 - [ ] Throwing functions have proper error handling (catch, guard, or ensure non-throwing logic)
 - [ ] `ASSERT` is considered where appropriate
 - [ ] `ASSERT` alone is not sufficient—ensure no crash occurs afterward
 - [ ] All paths avoid undefined behavior (null checks, bounds checks, ownership correctness)
 
 ## Includes & Dependencies
+
 - [ ] All required headers are included
 - [ ] Unnecessary includes are removed
 
 ## Task Acceptance / Requirements
+
 - [ ] Acceptance criteria for the work item/story is defined for QA
 
 ## Book advice
+
 - [ ] Prefer `auto` to explicit type declarations
 - [ ] When casting to different type, prefer explicit `static_cast` for clarity.
 - [ ] For object ctor use brace syntax (`obj{...}`) for most widely used initialization syntax and parentheses syntax (`obj(...)`) for handling `std::initializer_list` params correctly.
@@ -40,6 +47,7 @@
 - [ ] Prefer `alias` declarations to `typedef`s. Alias syntax is simpler and supports templatization.
 
 Using `typedef` syntax:
+
 ```cpp
 typedef
     std::unique_ptr<std::unordered_map<std::string, std::string>>
@@ -47,6 +55,7 @@ typedef
 ```
 
 Using `alias` syntax:
+
 ```cpp
 using UPtrMapSS =
     std::unique_ptr<std::unordered_map<std::string, std::string>>;
@@ -55,12 +64,14 @@ using UPtrMapSS =
 - [ ] Prefer scoped enums to unscoped enums.
 
 Using unscoped enums:
+
 ```cpp
 enum Color { black, white, red };
 auto white = false; // error! white already declared in this scope
 ```
 
 Using scoped enums:
+
 ```cpp
 enum class Color { black, white, red };
 auto white = false; // Ok
@@ -77,6 +88,7 @@ auto white = false; // Ok
 - [ ] Avoid default capture modes in lambda expressions.
 
 Default by-reference capture can lead to dangling references.
+
 ```cpp
 void addDivisorFilter()
 {
@@ -90,6 +102,7 @@ void addDivisorFilter()
 ```
 
 Default by-value capture is susceptible to dangling pointers (especially `this`), and it misleadingly suggests thatlambdas are self-contained.
+
 ```cpp
 void addDivisorFilter()
 {
@@ -130,6 +143,7 @@ auto func = [pw = std::move(pw)]                // init data mbr
 
 (chapter 7, p259)
 
-## To ask:
+## To ask
+
 - Do we prefer `auto` in our code base if it can be used?
 - Is there a standard way of initialization that we should use? Braces, parenmtheses?
