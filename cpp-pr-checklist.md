@@ -74,8 +74,61 @@ auto white = false; // Ok
 - [ ] Use `std::shared_ptr` for shared ownership resource management.
 - [ ] Use `std::weak_ptr` for `std::shared_ptr`-like pointers that can dangle and code should be able to detect that dangling.
 - [ ] Prefer `std::make_unique` and `std::make_shared` to direct use of `new`.
+- [ ] Avoid default capture modes in lambda expressions.
 
-(end at chapter 5, p175)
+Default by-reference capture can lead to dangling references.
+```cpp
+void addDivisorFilter()
+{
+    auto calc1 = computeSomeValue1();
+    auto calc2 = computeSomeValue2();
+    auto divisor = computeDivisor(calc1, calc2);
+    filters.emplace_back(                               // danger!
+        [&](int value) { return value % divisor == 0; } // ref to
+    );                                                  // divisor
+} 
+```
+
+Default by-value capture is susceptible to dangling pointers (especially `this`), and it misleadingly suggests thatlambdas are self-contained.
+```cpp
+void addDivisorFilter()
+{
+    static auto calc1 = computeSomeValue1();            // now static
+    static auto calc2 = computeSomeValue2();            // now static
+    static auto divisor = computeDivisor(calc1, calc2); // now static
+
+    filters.emplace_back(
+        [=](int value)                      // captures nothing!
+        { return value % divisor == 0; }    // refers to above static
+    );
+    ++divisor;  // modify divisor
+}
+```
+
+- [ ] Use `init` capture to move objects into closures in lambda expressions (C++14 and up)
+
+```cpp
+class Widget {  // some useful type
+public:
+    …
+    bool isValidated() const;
+    bool isProcessed() const;
+    bool isArchived() const;
+
+private:
+    …
+};
+
+auto pw = std::make_unique<Widget>();
+…   // configure *pw
+auto func = [pw = std::move(pw)]                // init data mbr
+            { return pw->isValidated()          // in closure w/
+                     && pw->isArchived(); };    // std::move(pw)
+```
+
+- [ ] Prefer lambdas to `std::bind`
+
+(chapter 7, p259)
 
 ## To ask:
 - Do we prefer `auto` in our code base if it can be used?
