@@ -140,8 +140,9 @@ auto func = [pw = std::move(pw)]                // init data mbr
 ```
 
 - [ ] Prefer lambdas to `std::bind`
+- [ ] Prefer task-based concurrency to thread-based
 
-(chapter 7, p259)
+(276p, 38 item)
 
 ## To ask
 
