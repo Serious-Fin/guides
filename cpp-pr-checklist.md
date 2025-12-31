@@ -141,8 +141,8 @@ auto func = [pw = std::move(pw)]                // init data mbr
 
 - [ ] Prefer lambdas to `std::bind`
 - [ ] Prefer task-based concurrency to thread-based
-
-(276p, 38 item)
+- [ ] Consider pass by value for copyable parameters that are cheap to move
+- [ ] Consider emplacement instead of insertion
 
 ## To ask
 
